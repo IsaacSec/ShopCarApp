@@ -71,7 +71,7 @@ public class ProductCRUD {
         SQLiteDatabase db = helper.getReadableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(CarShopContract.Product._ID, item.getID());
+        values.put(CarShopContract.Product.ID, item.getID());
         values.put(CarShopContract.Product.NAME, item.getName());
         values.put(CarShopContract.Product.PRICE, item.getPrice());
         values.put(CarShopContract.Product.PHOTO_URL, item.getPrice());
@@ -79,7 +79,7 @@ public class ProductCRUD {
         db.update(
             CarShopContract.Product.TABLE_NAME,
             values,
-            "_id = ?",
+            "id = ?",
             new String[]{item.getID()}
         );
     }
@@ -89,7 +89,7 @@ public class ProductCRUD {
 
         db.delete(
                 CarShopContract.Product.TABLE_NAME,
-                "_id = ?",
+                "id = ?",
                 new String[]{item.getID()}
         );
     }
