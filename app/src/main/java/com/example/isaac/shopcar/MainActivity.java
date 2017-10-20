@@ -1,5 +1,6 @@
 package com.example.isaac.shopcar;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +11,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.isaac.shopcar.adapters.RecyclerViewClickListener;
 import com.example.isaac.shopcar.adapters.RecyclerViewProductListAdapter;
 import com.example.isaac.shopcar.database.ProductCRUD;
 import com.example.isaac.shopcar.model.Product;
@@ -46,20 +49,26 @@ public class MainActivity extends AppCompatActivity {
 
     public void initViewComponent(){
         // Definitions
+        final Context context = this;
+
         addProduct = (FloatingActionButton) findViewById(R.id.main_fad_add_product);
         productList = (RecyclerView) findViewById(R.id.main_rv_product_list);
 
         // Configuration
+        ProductCRUD db = new ProductCRUD(this);
+        final ArrayList<Product> products = db.getProducts();
+        RecyclerViewProductListAdapter adapter = new RecyclerViewProductListAdapter(products, new RecyclerViewClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Intent newActivity = new Intent(context, EditProductActivity.class);
+                newActivity.putExtra("product",products.get(position));
+                startActivity(newActivity);
+            }
+        });
+
         productList.setHasFixedSize(true);
         productList.setLayoutManager(new LinearLayoutManager(this));
-        ProductCRUD db = new ProductCRUD(this);
-        RecyclerViewProductListAdapter adapter = new RecyclerViewProductListAdapter(db.getProducts());
         productList.setAdapter(adapter);
-
-        ArrayList<Product> products = db.getProducts();
-        for (Product p: products){
-            System.out.println(p.getID() +" | "+p.getName());
-        }
 
         // Actions
         addProduct.setOnClickListener(new View.OnClickListener() {

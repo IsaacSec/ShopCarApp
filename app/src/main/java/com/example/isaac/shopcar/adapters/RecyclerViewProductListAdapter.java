@@ -19,16 +19,21 @@ import java.util.ArrayList;
 public class RecyclerViewProductListAdapter extends RecyclerView.Adapter<RecyclerViewProductListAdapter.ShopProductViewHolder>{
 
     private ArrayList<Product> products;
+    private RecyclerViewClickListener listener;
 
-    public RecyclerViewProductListAdapter(ArrayList<Product> products){
+    public RecyclerViewProductListAdapter(ArrayList<Product> products, RecyclerViewClickListener listener){
         this.products = products;
+        this.listener = listener;
     }
 
     @Override
     public ShopProductViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_list_row, parent, false);
-        ShopProductViewHolder productViewHolder = new ShopProductViewHolder(v);
-        return productViewHolder;
+
+        //ShopProductViewHolder productViewHolder = new ShopProductViewHolder(v);
+        //return productViewHolder;
+
+        return new ShopProductViewHolder(v, listener);
     }
 
     @Override
@@ -51,17 +56,27 @@ public class RecyclerViewProductListAdapter extends RecyclerView.Adapter<Recycle
 
     // Class model
 
-    public static class ShopProductViewHolder extends RecyclerView.ViewHolder{
+    public static class ShopProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private ImageView photo;
         private TextView name;
         private TextView price;
 
-        ShopProductViewHolder(View view){
+        private RecyclerViewClickListener listener;
+
+        ShopProductViewHolder(View view, RecyclerViewClickListener listener){
             super(view);
 
             photo = (ImageView) view.findViewById(R.id.product_list_iv_photo);
             name = (TextView) view.findViewById(R.id.product_list_tv_name);
             price = (TextView) view.findViewById(R.id.product_list_tv_price);
+
+            this.listener = listener;
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v, getAdapterPosition());
         }
     }
 }
