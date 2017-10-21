@@ -28,7 +28,8 @@ public class SQLQuery {
     public static final String SQL_CREATE_BUY_RECORD_TABLE =
             "CREATE TABLE " + BuyRecord.TABLE_NAME + " (" +
                     BuyRecord.ID_LIST + TEXT_TYPE + COMMA_SEP +
-                    BuyRecord.ID_PRODUCT + TEXT_TYPE +
+                    BuyRecord.ID_PRODUCT + TEXT_TYPE + COMMA_SEP +
+                    BuyRecord.QUANTITY + TEXT_TYPE +
                     " );";
 
     public static final String SQL_CREATE_CARSHOP_TABLES =

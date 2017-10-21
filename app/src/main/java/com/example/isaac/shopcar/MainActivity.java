@@ -89,8 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
 
             case R.id.action_add_list:
-                // User chose the "Favorite" action, mark the current item
-                // as a favorite...
+                changeActivity(BuyListActivity.class);
                 return true;
 
             default:

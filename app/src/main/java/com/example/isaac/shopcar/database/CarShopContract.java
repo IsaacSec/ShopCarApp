@@ -28,6 +28,7 @@ public final class CarShopContract {
         public static final String TABLE_NAME = "buy_record";
         public static final String ID_LIST = "id_list";
         public static final String ID_PRODUCT = "id_product";
+        public static final String QUANTITY = "quantity";
     }
 
 }
