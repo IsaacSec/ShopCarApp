@@ -1,6 +1,7 @@
 package com.example.isaac.shopcar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,11 +17,16 @@ import android.widget.TextView;
 
 import com.example.isaac.shopcar.adapters.RecyclerViewBuyListAdapter;
 import com.example.isaac.shopcar.adapters.RecyclerViewClickListener;
+import com.example.isaac.shopcar.database.BuyListCRUD;
+import com.example.isaac.shopcar.database.BuyRecordCRUD;
 import com.example.isaac.shopcar.database.ProductCRUD;
+import com.example.isaac.shopcar.model.BuyList;
+import com.example.isaac.shopcar.model.BuyRecord;
 import com.example.isaac.shopcar.model.Product;
 import com.example.isaac.shopcar.model.ProductBuy;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BuyListActivity extends AppCompatActivity {
 
@@ -28,6 +34,7 @@ public class BuyListActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
     private FloatingActionButton fab;
+    private FloatingActionButton save;
     private RecyclerView buyRecordList;
     private EditText quantity;
     private TextView total;
@@ -50,6 +57,7 @@ public class BuyListActivity extends AppCompatActivity {
         buyRecordList = (RecyclerView) findViewById(R.id.buy_list_rv_list);
         quantity = (EditText) findViewById(R.id.buy_list_spin_quantity);
         total = (TextView) findViewById(R.id.buy_list_tv_total);
+        save = (FloatingActionButton) findViewById(R.id.buy_list_fab_save);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, getProductNames());
@@ -71,7 +79,6 @@ public class BuyListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String target = (String) products.getSelectedItem();
-                System.out.println(target);
                 ProductCRUD db = new ProductCRUD(context);
                 Product p = db.getProductByName(target);
                 buyRecords.add(new ProductBuy(p, quantity.getText().toString()));
@@ -85,6 +92,29 @@ public class BuyListActivity extends AppCompatActivity {
                 total.setText("$"+getTotal());
             }
         });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BuyListCRUD dblist = new BuyListCRUD(context);
+                dblist.registerBuyList(new BuyList("", (new Date()).toString(), total.getText().toString()));
+                ArrayList<BuyList> lists = dblist.getBuyLists();
+                String listId = ""+lists.get(lists.size()-1);
+
+                BuyRecordCRUD dbrecord = new BuyRecordCRUD(context);
+
+                for(ProductBuy record : buyRecords){
+                    dbrecord.registerRecord(new BuyRecord(listId,record.getProduct().getID(), record.getQuantity()));
+                }
+
+                changeActivity(MainActivity.class);
+            }
+        });
+    }
+
+    public void changeActivity(Class<? extends AppCompatActivity> aClass){
+        Intent createProduct = new Intent(this, aClass);
+        startActivity(createProduct);
     }
 
     private float getTotal(){

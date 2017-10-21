@@ -17,7 +17,10 @@ public class CarShopDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQLQuery.SQL_CREATE_CARSHOP_TABLES);
+        //db.execSQL(SQLQuery.SQL_CREATE_CARSHOP_TABLES);
+        db.execSQL(SQLQuery.SQL_CREATE_PRODUCT_TABLE);
+        db.execSQL(SQLQuery.SQL_CREATE_BUY_LIST_TABLE);
+        db.execSQL(SQLQuery.SQL_CREATE_BUY_RECORD_TABLE);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
