@@ -2,6 +2,7 @@ package com.example.isaac.shopcar;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.isaac.shopcar.adapters.RecyclerViewClickListener;
 import com.example.isaac.shopcar.adapters.RecyclerViewProductListAdapter;
+import com.example.isaac.shopcar.database.CarShopDbHelper;
 import com.example.isaac.shopcar.database.ProductCRUD;
 import com.example.isaac.shopcar.model.Product;
 

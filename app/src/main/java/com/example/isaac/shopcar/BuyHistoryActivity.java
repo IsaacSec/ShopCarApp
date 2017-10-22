@@ -1,5 +1,7 @@
 package com.example.isaac.shopcar;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,15 +29,18 @@ public class BuyHistoryActivity extends AppCompatActivity {
     }
 
     public void initViewComponents(){
+        final Context context = this;
         historyList = (RecyclerView) findViewById(R.id.buy_history_list);
 
         BuyListCRUD db = new BuyListCRUD(this);
-        ArrayList<BuyList> list = db.getBuyLists();
+        final ArrayList<BuyList> list = db.getBuyLists();
 
         RecyclerViewBuyHistoryAdapter adapter = new RecyclerViewBuyHistoryAdapter(list, new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                Intent i = new Intent(context, HistoryBuyListActivity.class);
+                i.putExtra("list",list.get(position));
+                startActivity(i);
             }
         });
 

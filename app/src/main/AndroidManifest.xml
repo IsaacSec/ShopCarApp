@@ -25,7 +25,8 @@
             android:name=".BuyListActivity"
             android:label="@string/title_activity_buy_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".BuyHistoryActivity"></activity>
+        <activity android:name=".BuyHistoryActivity" />
+        <activity android:name=".HistoryBuyListActivity"></activity>
     </application>
 
 </manifest>

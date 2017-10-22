@@ -130,6 +130,41 @@ public class ProductCRUD {
         return p;
     }
 
+    public Product getProductById(String target){
+        SQLiteDatabase db = helper.getReadableDatabase();
+        Product p = null;
+
+        String columns[] = {
+                CarShopContract.Product.ID,
+                CarShopContract.Product.NAME,
+                CarShopContract.Product.PRICE,
+                CarShopContract.Product.PHOTO_URL
+        };
+
+        String selectionArgs[] = {target};
+
+        Cursor cursor = db.query(
+                CarShopContract.Product.TABLE_NAME,
+                columns,
+                CarShopContract.Product.ID + "=?",
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        while (cursor.moveToNext()){
+            String id = getColumnValue(cursor, CarShopContract.Product.ID);
+            String name = getColumnValue(cursor, CarShopContract.Product.NAME);
+            String price = getColumnValue(cursor, CarShopContract.Product.PRICE);
+            String photo = getColumnValue(cursor, CarShopContract.Product.PHOTO_URL);
+
+            p = new Product(id, name, price, photo);
+        }
+
+        return p;
+    }
+
     private String getColumnValue (Cursor c, String column){
         return c.getString(c.getColumnIndexOrThrow(column));
     }

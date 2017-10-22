@@ -1,10 +1,12 @@
 package com.example.isaac.shopcar.model;
 
+import java.io.Serializable;
+
 /**
  * Created by isaac on 10/21/17.
  */
 
-public class BuyList {
+public class BuyList implements Serializable{
     private String id;
     private String date;
     private String total;

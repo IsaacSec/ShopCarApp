@@ -108,7 +108,7 @@ public class BuyListActivity extends AppCompatActivity {
                         ));
 
                 ArrayList<BuyList> lists = dblist.getBuyLists();
-                String listId = ""+lists.get(lists.size()-1);
+                String listId = ""+lists.get(lists.size()-1).getId();
 
                 BuyRecordCRUD dbrecord = new BuyRecordCRUD(context);
 
