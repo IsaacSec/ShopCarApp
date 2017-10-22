@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_show_list:
-                System.out.println("Holis");
+                changeActivity(BuyHistoryActivity.class);
                 return true;
 
             case R.id.action_add_list:
