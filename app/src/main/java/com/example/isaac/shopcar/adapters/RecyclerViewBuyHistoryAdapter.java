@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.isaac.shopcar.R;
-import com.example.isaac.shopcar.model.BuyHistory;
+import com.example.isaac.shopcar.model.BuyList;
 
 import java.util.ArrayList;
 
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public class RecyclerViewBuyHistoryAdapter extends RecyclerView.Adapter<RecyclerViewBuyHistoryAdapter.BuyHistoryHolder>{
 
-    private ArrayList<BuyHistory> products;
+    private ArrayList<BuyList> products;
     private RecyclerViewClickListener listener;
 
-    public RecyclerViewBuyHistoryAdapter(ArrayList<BuyHistory> products, RecyclerViewClickListener listener) {
+    public RecyclerViewBuyHistoryAdapter(ArrayList<BuyList> products, RecyclerViewClickListener listener) {
         this.products = products;
         this.listener = listener;
     }
@@ -34,11 +34,11 @@ public class RecyclerViewBuyHistoryAdapter extends RecyclerView.Adapter<Recycler
 
     @Override
     public void onBindViewHolder(BuyHistoryHolder holder, int position) {
-        BuyHistory history = products.get(position);
+        BuyList history = products.get(position);
 
         holder.date.setText("Compra "+history.getDate());
         holder.elements.setText(history.getElements()+" Elementos");
-        holder.total.setText("S"+history.getTotal());
+        holder.total.setText(history.getTotal());
     }
 
     @Override

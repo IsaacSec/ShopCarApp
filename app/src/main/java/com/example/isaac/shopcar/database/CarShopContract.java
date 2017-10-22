@@ -23,6 +23,7 @@ public final class CarShopContract {
         public static final String ID = "id";
         public static final String DATE = "buy_date";
         public static final String TOTAL = "total";
+        public static final String ELEMENTS = "elements";
     }
 
     public static class BuyRecord implements BaseColumns{

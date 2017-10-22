@@ -8,11 +8,13 @@ public class BuyList {
     private String id;
     private String date;
     private String total;
+    private String elements;
 
-    public BuyList(String id, String date, String total) {
+    public BuyList(String id, String date, String total, String e) {
         this.id = id;
         this.date = date;
         this.total = total;
+        this.elements = e;
     }
 
     public String getId() {
@@ -37,5 +39,13 @@ public class BuyList {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getElements() {
+        return elements;
+    }
+
+    public void setElements(String elements) {
+        this.elements = elements;
     }
 }

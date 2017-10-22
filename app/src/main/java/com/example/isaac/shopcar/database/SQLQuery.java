@@ -23,7 +23,8 @@ public class SQLQuery {
             "CREATE TABLE " + BuyList.TABLE_NAME + " (" +
                     BuyList.ID + " INTEGER PRIMARY KEY," +
                     BuyList.DATE + TEXT_TYPE + COMMA_SEP +
-                    BuyList.TOTAL + TEXT_TYPE +
+                    BuyList.TOTAL + TEXT_TYPE + COMMA_SEP +
+                    BuyList.ELEMENTS + TEXT_TYPE +
                     " );";
 
     public static final String SQL_CREATE_BUY_RECORD_TABLE =

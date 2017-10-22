@@ -27,6 +27,7 @@ public class BuyListCRUD {
 
         values.put(CarShopContract.BuyList.DATE, item.getDate());
         values.put(CarShopContract.BuyList.TOTAL, item.getTotal());
+        values.put(CarShopContract.BuyList.ELEMENTS, item.getElements());
 
         long newRowId = db.insert(CarShopContract.BuyList.TABLE_NAME, null, values);
         db.close();
@@ -40,7 +41,8 @@ public class BuyListCRUD {
         String columns[] = {
                 CarShopContract.BuyList.ID,
                 CarShopContract.BuyList.DATE,
-                CarShopContract.BuyList.TOTAL
+                CarShopContract.BuyList.TOTAL,
+                CarShopContract.BuyList.ELEMENTS
         };
 
         Cursor cursor = db.query(
@@ -57,8 +59,9 @@ public class BuyListCRUD {
             String id = getColumnValue(cursor, CarShopContract.BuyList.ID);
             String date = getColumnValue(cursor, CarShopContract.BuyList.DATE);
             String total = getColumnValue(cursor, CarShopContract.BuyList.TOTAL);
+            String elements = getColumnValue(cursor, CarShopContract.BuyList.ELEMENTS);
 
-            records.add(new BuyList(id, date, total));
+            records.add(new BuyList(id, date, total, elements));
         }
 
         return records;
@@ -71,6 +74,7 @@ public class BuyListCRUD {
         values.put(CarShopContract.BuyList.ID, item.getId());
         values.put(CarShopContract.BuyList.DATE, item.getDate());
         values.put(CarShopContract.BuyList.TOTAL, item.getTotal());
+        values.put(CarShopContract.BuyList.ELEMENTS, item.getElements());
 
         db.update(
                 CarShopContract.BuyList.TABLE_NAME,
@@ -98,7 +102,8 @@ public class BuyListCRUD {
         String columns[] = {
                 CarShopContract.BuyList.ID,
                 CarShopContract.BuyList.DATE,
-                CarShopContract.BuyList.TOTAL
+                CarShopContract.BuyList.TOTAL,
+                CarShopContract.BuyList.ELEMENTS
         };
 
         String selectionArgs[] = {target};
@@ -117,8 +122,9 @@ public class BuyListCRUD {
             String id = getColumnValue(cursor, CarShopContract.BuyList.ID);
             String date = getColumnValue(cursor, CarShopContract.BuyList.DATE);
             String total = getColumnValue(cursor, CarShopContract.BuyList.TOTAL);
+            String e =  getColumnValue(cursor, CarShopContract.BuyList.TOTAL);
 
-            records.add(new BuyList(id, date, total));
+            records.add(new BuyList(id, date, total, e));
         }
 
         return records.get(0);

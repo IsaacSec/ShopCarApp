@@ -25,6 +25,7 @@ import com.example.isaac.shopcar.model.BuyRecord;
 import com.example.isaac.shopcar.model.Product;
 import com.example.isaac.shopcar.model.ProductBuy;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -97,7 +98,15 @@ public class BuyListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 BuyListCRUD dblist = new BuyListCRUD(context);
-                dblist.registerBuyList(new BuyList("", (new Date()).toString(), total.getText().toString()));
+                SimpleDateFormat sdf = new SimpleDateFormat("mm-dd-yyyy");
+                String date = sdf.format(new Date());
+                dblist.registerBuyList(new BuyList(
+                            "",
+                            date,
+                            total.getText().toString(),
+                            ""+buyRecords.size()
+                        ));
+
                 ArrayList<BuyList> lists = dblist.getBuyLists();
                 String listId = ""+lists.get(lists.size()-1);
 
